@@ -2,37 +2,34 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Galerie Images',
+  runApp(
+    MaterialApp(
+      title: 'Gallery Images',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        useMaterial3: false, // gives the classic blue look from the TP
+        useMaterial3: false,
       ),
-      home: const MyHomePage(title: 'Galerie Images'),
-    );
-  }
+      initialRoute: 'first',
+      routes: {
+        'first': (context) => const FirstScreen(),
+        'second': (context) => const SecondScreen(),
+      },
+    ),
+  );
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+//first screen : image rotation and next button
+class FirstScreen extends StatefulWidget {
+  const FirstScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<FirstScreen> createState() => _FirstScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _FirstScreenState extends State<FirstScreen> {
   int _deg = 0;
-  final String _image = 'images/lightningmcqueen.jpg'; // keep your own file name here
+  final String _image = 'images/lightningmcqueen.jpg';
 
   void _rotateImage() {
     setState(() {
@@ -45,17 +42,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final angle = _deg * pi / 180;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: const Text('First Screen')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             const Text('Images :'),
             const SizedBox(height: 20),
-            // Fixed 300x300 box: the rotated image (max diagonal ~283)
-            // stays inside it, so it never covers the text above.
             SizedBox(
               width: 300,
               height: 300,
@@ -66,6 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to the second screen using a named route.
+                Navigator.pushNamed(context, 'second');
+              },
+              child: const Text('Next'),
+            ),
           ],
         ),
       ),
@@ -73,6 +74,27 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _rotateImage,
         tooltip: 'Rotate',
         child: const Text('Rotate'),
+      ),
+    );
+  }
+}
+
+//second screen : go back button
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Second Screen')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Return to the first screen.
+            Navigator.pop(context);
+          },
+          child: const Text('Go back'),
+        ),
       ),
     );
   }
