@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "488003119722",
+    "project_id": "tp-firebase-fa854",
+    "storage_bucket": "tp-firebase-fa854.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488003119722:android:e378af272b3c9125b87813",
+        "android_client_info": {
+          "package_name": "com.tp.firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzVZhKz3lOX3ECKaPXKpiONVjYne_cX04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
